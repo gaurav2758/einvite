@@ -1,0 +1,217 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap');
+
+:root {
+    --gold: #d4af37;
+    --dark: #0a0a0a;
+    --light: #fdfbf7;
+    --accent: #1c1c1c;
+}
+
+body {
+    background-color: var(--dark);
+    color: var(--light);
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    cursor: default;
+}
+
+h1,
+h2,
+h3,
+.serif {
+    font-family: 'Cormorant Garamond', serif;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: auto;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--dark);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--gold);
+    border-radius: 10px;
+}
+
+.gold-text {
+    background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+}
+
+.section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 2rem;
+}
+
+/* Decorative Background Lines */
+.grid-lines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.04;
+    background-image:
+        linear-gradient(var(--gold) 1px, transparent 1px),
+        linear-gradient(90deg, var(--gold) 1px, transparent 1px);
+    background-size: 100px 100px;
+}
+
+/* Glowing Orb */
+.glow-orb {
+    position: fixed;
+    width: 60vw;
+    height: 60vw;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, rgba(0, 0, 0, 0) 70%);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(60px);
+}
+
+.content-wrapper {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.hero-title {
+    font-size: clamp(4rem, 12vw, 10rem);
+    line-height: 0.9;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+}
+
+.event-card {
+    background: rgba(28, 28, 28, 0.4);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 4rem 2rem;
+    border-radius: 20px;
+    transition: border-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.event-card:hover {
+    border-color: rgba(212, 175, 55, 0.6);
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px -10px rgba(212, 175, 55, 0.2);
+}
+
+.event-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.7s ease;
+}
+
+.event-card:hover::before {
+    left: 150%;
+}
+
+.line {
+    width: 1px;
+    height: 100px;
+    background: var(--gold);
+    margin: 2rem auto;
+    transform-origin: top;
+}
+
+
+.stylized-name {
+    font-family: 'Great Vibes', cursive;
+    text-transform: none;
+    font-weight: 400;
+    letter-spacing: 0;
+}
+
+/* Music Player */
+.music-player {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 50;
+    background: rgba(28, 28, 28, 0.8);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    padding: 1rem 1.5rem;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    backdrop-filter: blur(10px);
+    transition: background 0.3s ease;
+}
+
+.music-player:hover {
+    background: rgba(40, 40, 40, 0.9);
+}
+
+.music-btn {
+    background: transparent;
+    border: none;
+    color: var(--gold);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.music-btn svg {
+    width: 24px;
+    height: 24px;
+}
+
+.spin {
+    animation: spin 4s linear infinite;
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* SVG Vectors */
+.floating-svg {
+    position: absolute;
+    opacity: 0.1;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.svg-gold {
+    fill: none;
+    stroke: var(--gold);
+    stroke-width: 1.5;
+}
