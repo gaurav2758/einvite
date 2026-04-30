@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surbhi & Shubham | The Big Fat Jain Wedding</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/split-type"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- GOLD DUST PARTICLES -->
+    <div id="particles-js" class="fixed inset-0 z-[5] pointer-events-none"></div>
+
+    <!-- INTRO OVERLAY -->
+    <div id="intro-overlay" class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[var(--dark)] cursor-pointer">
+        <div class="glow-orb" style="width: 300px; height: 300px;"></div>
+        <div class="z-10 text-center intro-content">
+            <h1 class="text-[8rem] md:text-[12rem] text-[var(--gold)] stylized-name mb-4" style="line-height: 1.2; padding: 0.2em;">SS</h1>
+            <p class="text-xs md:text-sm tracking-[0.4em] uppercase text-[var(--gold)] animate-pulse">Tap to Open</p>
+        </div>
+    </div>
+
+    <div class="grid-lines"></div>
+    <div class="glow-orb" id="cursor-glow"></div>
+
+    <!-- Background Music -->
+    <audio id="bg-music" loop>
+        <source src="assets/music/wedding-bgm.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <div class="music-player">
+        <button class="music-btn" id="play-pause-btn" onclick="toggleMusic()" aria-label="Play Music">
+            <!-- Play Icon -->
+            <svg id="icon-play" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
+                    clip-rule="evenodd"></path>
+            </svg>
+            <!-- Pause Icon (hidden initially) -->
+            <svg id="icon-pause" class="w-6 h-6 hidden spin" fill="currentColor" viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z"
+                    clip-rule="evenodd"></path>
+            </svg>
+        </button>
+        <span class="text-xs tracking-widest uppercase text-[var(--gold)]">Music</span>
+    </div>
+
+    <!-- SVGs that will float/animate on scroll -->
+    <!-- Flower SVG 1 -->
+    <svg class="floating-svg svg-gold" style="top: 15%; left: 10%; width: 150px; height: 150px;" viewBox="0 0 100 100">
+        <path
+            d="M50 20 C60 0, 90 20, 50 50 C90 20, 100 60, 50 50 C100 60, 80 100, 50 50 C80 100, 20 100, 50 50 C20 100, 0 60, 50 50 C0 60, 10 20, 50 50 C10 20, 40 0, 50 20" />
+    </svg>
+    <!-- Ring SVG -->
+    <svg class="floating-svg svg-gold" style="top: 40%; right: 5%; width: 200px; height: 200px;" viewBox="0 0 100 100">
+        <circle cx="40" cy="50" r="30" />
+        <circle cx="60" cy="50" r="30" />
+        <path d="M40 20 L50 10 L60 20 Z" fill="none" />
+    </svg>
+    <!-- Leaf SVG -->
+    <svg class="floating-svg svg-gold" style="top: 70%; left: 5%; width: 120px; height: 120px;" viewBox="0 0 100 100">
+        <path d="M20 80 C20 50, 50 20, 80 20 C50 20, 20 50, 20 80" />
+        <line x1="20" y1="80" x2="80" y2="20" />
+    </svg>
+
+    <!-- HERO SECTION -->
+    <section class="section text-center" id="hero">
+        <div class="content-wrapper flex flex-col items-center justify-center min-h-[90vh]">
+            <p class="text-xs md:text-sm tracking-[0.4em] uppercase text-gray-400 mb-6 hero-sub">Presenting</p>
+            <p class="text-2xl md:text-4xl tracking-[0.2em] uppercase gold-text mb-16 hero-sub font-serif italic">The Big Fat Jain Wedding!</p>
+
+            <div class="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-20 w-full px-4">
+                <!-- Bride -->
+                <div class="text-center hero-person flex-1 flex flex-col items-center justify-center">
+                    <p class="text-xs md:text-sm tracking-widest text-[var(--gold)] uppercase mb-4 opacity-0 transform translate-y-4 hero-fade">The Gorgeous Bride</p>
+                    <h1 class="text-6xl md:text-8xl font-light mb-4 hero-text font-serif">Surbhi</h1>
+                    <p class="text-xs md:text-sm text-gray-400 font-serif italic opacity-0 transform translate-y-4 hero-fade">D/O Mr Praveen Jain and Seema Jain</p>
+                </div>
+
+                <!-- & -->
+                <div class="text-5xl md:text-7xl italic text-[var(--gold)] hero-ampersand font-light opacity-0 transform scale-50">&amp;</div>
+
+                <!-- Groom -->
+                <div class="text-center hero-person flex-1 flex flex-col items-center justify-center">
+                    <p class="text-xs md:text-sm tracking-widest text-[var(--gold)] uppercase mb-4 opacity-0 transform translate-y-4 hero-fade">The Dashing Groom</p>
+                    <h1 class="text-6xl md:text-8xl font-light mb-4 hero-text font-serif">Shubham</h1>
+                    <p class="text-xs md:text-sm text-gray-400 font-serif italic opacity-0 transform translate-y-4 hero-fade">S/O Mr Praveen Jain and Neeru Jain</p>
+                </div>
+            </div>
+
+            <div class="line hero-line mt-16 mb-8"></div>
+
+            <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center opacity-50 scroll-indicator">
+                <span class="text-xs tracking-widest mb-4 uppercase">Scroll to discover</span>
+                <div class="w-[1px] h-16 bg-gradient-to-b from-[var(--gold)] to-transparent animate-pulse"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CREDITS SECTION -->
+    <section class="section text-center py-32" id="credits">
+        <div class="content-wrapper px-4">
+            <h2 class="text-3xl md:text-5xl italic gold-text mb-16 credits-title">Credits</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-4xl mx-auto">
+                <div class="credits-text">
+                    <p class="text-sm tracking-[0.3em] uppercase text-gray-400 mb-4">Produced By</p>
+                    <p class="text-2xl md:text-3xl font-serif text-[var(--gold)]">Isha - Ankit</p>
+                </div>
+                <div class="credits-text">
+                    <p class="text-sm tracking-[0.3em] uppercase text-gray-400 mb-4">Directed By</p>
+                    <p class="text-lg md:text-xl font-serif text-gray-300 italic mb-2">The Heavenly blessings of</p>
+                    <p class="text-xl md:text-2xl font-serif text-[var(--gold)]">Late Lala Tarash Chand Jain</p>
+                    <p class="text-sm font-serif text-gray-400 my-2">&</p>
+                    <p class="text-xl md:text-2xl font-serif text-[var(--gold)]">Late Shri Ratan Kumar Bairathi</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EVENTS SECTION -->
+    <section class="section py-32" id="events">
+        <div class="content-wrapper px-4">
+            <h2 class="text-center text-5xl md:text-7xl mb-32 gold-text events-title">The Itinerary</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
+
+                <!-- Event 1: Sagan -->
+                <div class="event-card text-center event-item">
+                    <p class="text-[var(--gold)] font-serif text-xl italic mb-4">7 June</p>
+                    <h3 class="text-4xl mb-4">Sagan</h3>
+                    <p class="text-sm text-gray-300 italic mb-6">“Rishta Pakka Picture Baaki Hai!”</p>
+                    <div class="w-16 h-[1px] bg-gray-600 mx-auto mb-6"></div>
+                    <p class="text-gray-400 tracking-[0.2em] uppercase text-xs mb-2">Vione Banquets</p>
+                    <p class="text-[var(--gold)] tracking-[0.2em] uppercase text-xs">Delhi</p>
+                </div>
+
+                <!-- Event 2: Mehndi + Bhaat -->
+                <div class="event-card text-center event-item lg:translate-y-12">
+                    <p class="text-[var(--gold)] font-serif text-xl italic mb-4">19 June | High Tea</p>
+                    <h3 class="text-4xl mb-4">Mehndi<br>+ Bhaat</h3>
+                    <p class="text-sm text-gray-300 italic mb-6">“Mehndi, Masti aur Mountain Waali Shaam”</p>
+                    <div class="w-16 h-[1px] bg-gray-600 mx-auto mb-6"></div>
+                    <p class="text-gray-400 tracking-[0.2em] uppercase text-xs mb-2">Royal Orchard</p>
+                    <p class="text-[var(--gold)] tracking-[0.2em] uppercase text-xs">Mussoorie</p>
+                </div>
+
+                <!-- Event 3: Sangeet Night -->
+                <div class="event-card text-center event-item lg:translate-y-24">
+                    <p class="text-[var(--gold)] font-serif text-xl italic mb-4">19 June | 7 PM</p>
+                    <h3 class="text-4xl mb-4">Sangeet<br>Night</h3>
+                    <p class="text-sm text-gray-300 italic mb-4">“Shake it like Shammi - Wedding Edition”</p>
+                    <p class="text-xs text-[var(--gold)] uppercase tracking-wider mb-6">Dress code: Glam Edition - Sham
+                        Shandaar</p>
+                    <div class="w-16 h-[1px] bg-gray-600 mx-auto mb-6"></div>
+                    <p class="text-gray-400 tracking-[0.2em] uppercase text-xs mb-2">Royal Orchard</p>
+                    <p class="text-[var(--gold)] tracking-[0.2em] uppercase text-xs">Mussoorie</p>
+                </div>
+
+                <!-- Event 4: Haldi -->
+                <div class="event-card text-center event-item">
+                    <p class="text-[var(--gold)] font-serif text-xl italic mb-4">20 June</p>
+                    <h3 class="text-4xl mb-4">Haldi</h3>
+                    <p class="text-sm text-gray-300 italic mb-4">“Haldi Ke Rang, Pyaar Ke Sang”</p>
+                    <p class="text-xs text-[var(--gold)] uppercase tracking-wider mb-6">Dress code: Orange and Pink</p>
+                    <div class="w-16 h-[1px] bg-gray-600 mx-auto mb-6"></div>
+                    <p class="text-gray-400 tracking-[0.2em] uppercase text-xs mb-2">Parking Lot, Royal Orchard</p>
+                    <p class="text-[var(--gold)] tracking-[0.2em] uppercase text-xs">Mussoorie</p>
+                </div>
+
+                <!-- Event 5: The Wedding -->
+                <div class="event-card text-center event-item lg:translate-y-12 md:col-span-2 lg:col-span-1">
+                    <p class="text-[var(--gold)] font-serif text-xl italic mb-4">20 June</p>
+                    <h3 class="text-4xl mb-4">The<br>Wedding</h3>
+                    <p class="text-sm text-gray-300 italic mb-4">“Shaadi Ke Side Effects: Happily Ever After”</p>
+                    <p class="text-xs text-[var(--gold)] uppercase tracking-wider mb-6">Dress code: Shadi Wale</p>
+                    <div class="w-16 h-[1px] bg-gray-600 mx-auto mb-6"></div>
+                    <p class="text-gray-400 tracking-[0.2em] uppercase text-xs mb-2">Royal Orchard</p>
+                    <p class="text-[var(--gold)] tracking-[0.2em] uppercase text-xs">Mussoorie</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FINALE SECTION -->
+    <section class="section text-center min-h-[80vh]" id="finale">
+        <div class="content-wrapper">
+            <h1 class="text-7xl md:text-[10rem] mb-8 finale-title gold-text">S & S</h1>
+            <p class="text-2xl md:text-4xl italic text-gray-300 mb-16 finale-text">We can't wait to see you</p>
+            <div class="line finale-line"></div>
+        </div>
+    </section>
+
+    <script>
+        // Music Player Logic
+        const music = document.getElementById('bg-music');
+        const playIcon = document.getElementById('icon-play');
+        const pauseIcon = document.getElementById('icon-pause');
+        let isPlaying = false;
+
+        function toggleMusic() {
+            if (isPlaying) {
+                music.pause();
+                playIcon.classList.remove('hidden');
+                pauseIcon.classList.add('hidden');
+            } else {
+                music.play().catch(error => {
+                    console.log("Audio playback failed: ", error);
+                    alert("Please add an MP3 file named 'wedding-bgm.mp3' inside the 'assets/music' folder to play music.");
+                });
+                playIcon.classList.add('hidden');
+                pauseIcon.classList.remove('hidden');
+            }
+            isPlaying = !isPlaying;
+        }
+
+        // Setup GSAP
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Smooth cursor glow follow
+        const cursorGlow = document.getElementById('cursor-glow');
+        window.addEventListener('mousemove', (e) => {
+            gsap.to(cursorGlow, {
+                x: e.clientX - window.innerWidth / 2,
+                y: e.clientY - window.innerHeight / 2,
+                duration: 1.5,
+                ease: "power2.out"
+            });
+        });
+
+        // Initialize SplitType for text animations
+        const heroTexts = new SplitType('.hero-text', { types: 'chars' });
+
+        // Initial loader timeline (paused until tap)
+        const tl = gsap.timeline({ paused: true });
+
+        // Intro Overlay Logic
+        const introOverlay = document.getElementById('intro-overlay');
+        
+        // Prevent scrolling initially
+        document.body.style.overflow = 'hidden';
+
+        introOverlay.addEventListener('click', () => {
+            // Try to play music
+            if (!isPlaying) {
+                music.play().then(() => {
+                    isPlaying = true;
+                    playIcon.classList.add('hidden');
+                    pauseIcon.classList.remove('hidden');
+                }).catch(e => console.log("Audio play failed on tap:", e));
+            }
+            
+            // Animate out the overlay
+            gsap.to('.intro-content', {
+                opacity: 0,
+                y: -50,
+                duration: 0.8,
+                ease: "power2.in"
+            });
+            
+            gsap.to(introOverlay, {
+                yPercent: -100,
+                duration: 1.5,
+                ease: "power4.inOut",
+                delay: 0.3,
+                onComplete: () => {
+                    introOverlay.style.display = 'none';
+                    // Allow scrolling again
+                    document.body.style.overflow = '';
+                }
+            });
+
+            // Start main animations
+            setTimeout(() => {
+                tl.play();
+            }, 800);
+        });
+
+        // Check if characters were successfully created
+        if (heroTexts.chars && heroTexts.chars.length > 0) {
+            tl.from(heroTexts.chars, {
+                y: 100,
+                opacity: 0,
+                duration: 1.5,
+                stagger: 0.05,
+                ease: "power4.out",
+                delay: 0.2
+            });
+        } else {
+            tl.from('.hero-text', {
+                y: 50,
+                opacity: 0,
+                duration: 1.5,
+                ease: "power4.out"
+            });
+        }
+
+        tl.from('.hero-sub', {
+            opacity: 0,
+            y: 20,
+            duration: 1.5,
+            stagger: 0.2,
+            ease: "power2.out"
+        }, "-=1")
+            .to('.hero-ampersand', {
+                opacity: 1,
+                scale: 1,
+                duration: 1.5,
+                ease: "back.out(1.7)"
+            }, "-=1")
+            .to('.hero-fade', {
+                opacity: 1,
+                y: 0,
+                duration: 1.5,
+                stagger: 0.2,
+                ease: "power2.out"
+            }, "-=1.5")
+            .from('.hero-line', {
+                scaleY: 0,
+                duration: 1.5,
+                ease: "power3.inOut"
+            }, "-=0.5")
+            .from('.scroll-indicator', {
+                opacity: 0,
+                y: -20,
+                duration: 1
+            }, "-=0.5");
+
+        // Parallax effect on hero
+        gsap.to('#hero .content-wrapper', {
+            yPercent: 40,
+            opacity: 0,
+            scrollTrigger: {
+                trigger: '#hero',
+                start: 'top top',
+                end: 'bottom top',
+                scrub: true
+            }
+        });
+
+        // Credits Section Animation
+        gsap.from('.credits-title', {
+            scrollTrigger: {
+                trigger: '#credits',
+                start: 'top 80%',
+            },
+            opacity: 0,
+            y: 50,
+            duration: 1.5,
+            ease: "power3.out"
+        });
+
+        gsap.from('.credits-text', {
+            scrollTrigger: {
+                trigger: '#credits',
+                start: 'top 70%',
+            },
+            opacity: 0,
+            y: 40,
+            stagger: 0.3,
+            duration: 1.5,
+            ease: "power3.out"
+        });
+
+        // Events Section Animations
+        gsap.from('.events-title', {
+            scrollTrigger: {
+                trigger: '#events',
+                start: 'top 85%',
+            },
+            opacity: 0,
+            scale: 0.9,
+            duration: 1.5,
+            ease: "power3.out"
+        });
+
+        const eventItems = gsap.utils.toArray('.event-item');
+        eventItems.forEach((item, i) => {
+            gsap.from(item, {
+                scrollTrigger: {
+                    trigger: item,
+                    start: 'top 85%',
+                },
+                opacity: 0,
+                y: 80,
+                rotationX: -10,
+                duration: 1.5,
+                delay: (i % 3) * 0.2,
+                ease: "power4.out"
+            });
+        });
+
+        // Floating SVGs Animation
+        gsap.utils.toArray('.floating-svg').forEach((svg, i) => {
+            gsap.to(svg, {
+                y: -200,
+                rotation: 90,
+                opacity: 0.3,
+                scrollTrigger: {
+                    trigger: "body",
+                    start: "top top",
+                    end: "bottom bottom",
+                    scrub: 1
+                }
+            });
+        });
+
+        // Parallax background elements
+        gsap.to('.grid-lines', {
+            scrollTrigger: {
+                trigger: 'body',
+                start: 'top top',
+                end: 'bottom bottom',
+                scrub: 1
+            },
+            y: 100,
+            opacity: 0.1
+        });
+
+        // Finale Section
+        const finaleTl = gsap.timeline({
+            scrollTrigger: {
+                trigger: '#finale',
+                start: 'top 65%',
+            }
+        });
+
+        finaleTl.from('.finale-title', {
+            opacity: 0,
+            scale: 0.8,
+            y: 50,
+            duration: 1.5,
+            ease: "power4.out"
+        })
+            .from('.finale-text', {
+                opacity: 0,
+                y: 30,
+                duration: 1.2,
+                ease: "power2.out"
+            }, "-=1")
+            .from('.finale-line', {
+                scaleY: 0,
+                duration: 1.5,
+                ease: "power3.inOut"
+            }, "-=0.8");
+
+        // Particles.js configuration for subtle gold shimmer
+        particlesJS('particles-js', {
+            "particles": {
+                "number": { "value": 40, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#d4af37" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.4, "random": true, "anim": { "enable": true, "speed": 1, "opacity_min": 0.1, "sync": false } },
+                "size": { "value": 3, "random": true, "anim": { "enable": true, "speed": 2, "size_min": 0.1, "sync": false } },
+                "line_linked": { "enable": false },
+                "move": { "enable": true, "speed": 0.5, "direction": "top", "random": true, "straight": false, "out_mode": "out", "bounce": false }
+            },
+            "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false }, "onclick": { "enable": false }, "resize": true } },
+            "retina_detect": true
+        });
+
+    </script>
+</body>
+
+</html>
